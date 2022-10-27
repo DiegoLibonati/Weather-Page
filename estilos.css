@@ -1,0 +1,138 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 10px;
+    list-style: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    overflow-x: hidden;
+}
+
+img{
+    max-width: 100%;
+}
+
+body{
+    width: 100vw;
+    height: 65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #390879;
+}
+
+.section_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column wrap;
+    width: 80%;
+    height: 50rem;
+    border: .1rem solid #000;
+    background: #b8df10;
+    box-shadow: .1rem .1rem .1rem .1rem #000;
+}
+
+    .section_container_search{
+        width: 100%;
+        height: 15rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row wrap;
+    } 
+
+        .section_container_search h2{
+            font-size: 5rem;
+            color: #390879;
+            width: 100%;
+            text-align: center;
+        }
+
+        .section_container_search input{
+            height: 3rem;
+            width: 60%;
+            font-size: 2rem;
+            border: none;
+            outline: none;
+            background-color: #390879;
+            color: #fff;
+            border-top-left-radius: .5rem;
+            border-bottom-left-radius: .5rem;
+            padding-left: 1rem;
+        }
+
+        .section_container_search button{
+            font-size: 2rem;
+            width: 30%;
+            height: 3rem;
+            border: none;
+            background-color: #390879;
+            color: #fff;
+            border-top-right-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+        }
+
+    .section_container img{
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .section_container_temp{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: column nowrap;
+        height: 15rem;
+    }
+
+        .section_container_temp h1{
+            font-size: 5rem;
+            color: #390879;
+        }
+
+        .section_container_temp h3{
+            font-size: 3rem;
+            color: #390879;
+        }
+
+@media only screen and (min-width:1024px){
+
+    body{
+        height: 90rem;
+    }
+
+    .section_container{
+        height: 70rem;
+        width: 30%;
+    }
+    
+        .section_container_search{
+            align-items: center;
+            justify-content: center;
+            flex-flow: row wrap;
+        } 
+    
+            .section_container_search h2{
+                text-align: center;
+                font-size: 10rem;
+                width: 100%;
+            }
+    
+            .section_container_search input{
+                width: 40%;
+            }
+    
+            .section_container_search button{
+                width: 20%;
+            }
+    
+            .section_container_temp h1{
+                font-size: 7rem;
+            }
+    
+            .section_container_temp h3{
+                font-size: 4rem;
+            }
+
+}
