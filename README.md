@@ -37,7 +37,7 @@ I made a web page that we can search the current weather of cities and countries
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Wheater%20page`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Wheater%20Page`
 
 ## Video
 
