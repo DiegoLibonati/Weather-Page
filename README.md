@@ -23,21 +23,9 @@ I made a web page that we can search the current weather of cities and countries
 2. CSS3
 3. HTML5
 
-## Galery
-
-![Wheater-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/Wheater-0.jpg)
-
-![Wheater-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/Wheater-1.jpg)
-
-![Wheater-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/Wheater-2.jpg)
-
-![Wheater-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/Wheater-3.jpg)
-
-![Wheater-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/Wheater-4.jpg)
-
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Wheater%20Page`
+[`https://www.diegolibonati.com.ar/#/project/48`](https://www.diegolibonati.com.ar/#/project/48)
 
 ## Video
 
