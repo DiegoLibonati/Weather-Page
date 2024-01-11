@@ -14,23 +14,30 @@ const getApiWeatherInfo = async (country: string): Promise<WeatherCountry> => {
 
     const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}`);
 
-    const result = await request.json();
+    const result: WeatherCountry = await request.json();
 
     return result;
     
 }
 
-const searchTemp = async () => {
+const searchTemp = async (): Promise<void> => {
 
     const inputValue: string = sectionContainerSearchInput.value;
 
+    if (!inputValue.trim()){
+        return
+    }
+
     const weatherCountry: WeatherCountry = await getApiWeatherInfo(inputValue);
+
+    sectionContainerSearchInput.value = ""
 
     sectionContainerImg.setAttribute("src", `https://openweathermap.org/img/wn/${weatherCountry.weather[0].icon}@2x.png`);
     sectionContainerSearchCountryName.innerHTML = `${weatherCountry.name.toUpperCase()}`;
     sectionContainerTemp.innerHTML = `${Math.floor(weatherCountry.main.temp - 273.15)}°`;
     sectionContainerTempType.innerHTML = `${weatherCountry.weather[0].description.charAt(0).toUpperCase() + weatherCountry.weather[0].description.toLowerCase().slice(1)}`;
 
+    return
 }
 
 sectionContainerSearchBtn.addEventListener("click", searchTemp);
