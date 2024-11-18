@@ -1,2 +1,2 @@
-VITE_API_KEY=String
-VITE_API_URL=String
+VITE_API_KEY=String -> its a code from openweathermap (api key)
+VITE_API_URL=String -> like: https://api.openweathermap.org/data/2.5
