@@ -50,7 +50,7 @@ I made a web page that we can search the current weather of cities and countries
 "typescript": "^5.2.2"
 "vite": "^5.0.8"
 "jest-fixed-jsdom": "^0.0.9"
-"jest-environment-jsdom": "^29.7.0",
+"jest-environment-jsdom": "^29.7.0"
 ```
 
 ## Portfolio Link
