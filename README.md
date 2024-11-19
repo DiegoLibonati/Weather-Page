@@ -72,50 +72,83 @@ https://user-images.githubusercontent.com/99032604/199374571-9b1fa392-28e1-4dea-
 We obtain all the containers we are going to use:
 
 ```
-const sectionContainerImg = document.querySelector(".section_container img") as HTMLImageElement;
-const sectionContainerSearchCountryName = document.querySelector(".section_container_search h2") as HTMLHeadingElement;
-const sectionContainerSearchInput = document.querySelector(".section_container_search input") as HTMLInputElement;
-const sectionContainerSearchBtn = document.querySelector(".section_container_search button") as HTMLButtonElement;
-const sectionContainerTemp = document.querySelector(".section_container_temp h1") as HTMLHeadingElement;
-const sectionContainerTempType = document.querySelector(".section_container_temp h3") as HTMLHeadingElement;
+export const searchButton = document.querySelector(
+  ".section_container_search button"
+) as HTMLButtonElement;
+export const searchInput = document.querySelector(
+  ".section_container_search input"
+) as HTMLInputElement;
 
-const API_KEY = "YOUR_API_KEY"
+export const weatherImg = document.querySelector(
+  ".section_container img"
+) as HTMLImageElement;
+export const countryName = document.querySelector(
+  ".section_container_search h2"
+) as HTMLHeadingElement;
+export const temperature = document.querySelector(
+  ".section_container_temp h1"
+) as HTMLHeadingElement;
+export const temperatureDescription = document.querySelector(
+  ".section_container_temp h3"
+) as HTMLHeadingElement;
 ```
 
-The `getApiWeatherInfo()` function is in charge of bringing all the information about a country or city through an API call:
+The `getWeatherInformation()` function is in charge of bringing all the information about a country or city through an API call:
 
 ```
-const getApiWeatherInfo = async (country: string): Promise<WeatherCountry> => {
+import { WeatherCountry } from "../../../entities/entities";
 
-    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}`);
+import { CONFIG } from "../../../constants/config";
 
-    const result: WeatherCountry = await request.json();
+export const getWeatherInformation = async (
+  country: string
+): Promise<WeatherCountry> => {
+  const request = await fetch(
+    `/weather?q=${country}&appid=${CONFIG.API_KEY}`
+  );
 
-    return result;
+  const result: WeatherCountry = await request.json();
 
-}
+  return result;
+};
 ```
 
 The `searchTemp()` function is in charge of executing the previous function to get the information from the API about the city or country entered in the input and also to render the information in the components:
 
 ```
 const searchTemp = async (): Promise<void> => {
+  const inputValue: string = searchInput.value;
 
-    const inputValue: string = sectionContainerSearchInput.value;
+  if (!inputValue.trim()) {
+    searchInput.value = "";
+    return;
+  }
 
-    if (!inputValue.trim()){
-        return
-    }
+  const weatherCountry: WeatherCountry = await getWeatherInformation(
+    inputValue
+  );
 
-    const weatherCountry: WeatherCountry = await getApiWeatherInfo(inputValue);
+  searchInput.value = "";
 
-    sectionContainerSearchInput.value = ""
+  const icon = weatherCountry.weather[0].icon;
+  const name = weatherCountry.name.toUpperCase();
+  const celsiusTemp = getCelsius(weatherCountry.main.temp);
+  const description = getCapitalizeWord(weatherCountry.weather[0].description);
 
-    sectionContainerImg.setAttribute("src", `https://openweathermap.org/img/wn/${weatherCountry.weather[0].icon}@2x.png`);
-    sectionContainerSearchCountryName.innerHTML = `${weatherCountry.name.toUpperCase()}`;
-    sectionContainerTemp.innerHTML = `${Math.floor(weatherCountry.main.temp - 273.15)}°`;
-    sectionContainerTempType.innerHTML = `${weatherCountry.weather[0].description.charAt(0).toUpperCase() + weatherCountry.weather[0].description.toLowerCase().slice(1)}`;
+  weatherImg.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+  countryName.innerHTML = name;
+  temperature.innerHTML = `${celsiusTemp}°`;
+  temperatureDescription.innerHTML = description;
+};
 
-    return
-}
+const onInit = () => {
+  // console.log("YOUR CONFIG FILE: ", CONFIG);
+
+  searchButton.addEventListener("click", searchTemp);
+};
+
+document.addEventListener("DOMContentLoaded", onInit);
 ```
