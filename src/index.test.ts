@@ -34,8 +34,6 @@ jest.mock("./constants/config.ts", () => ({
 }));
 
 beforeEach(() => {
-  jest.resetModules();
-
   document.body.innerHTML = OFFICIAL_BODY;
 
   require("./index.ts");
