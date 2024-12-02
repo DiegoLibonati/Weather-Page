@@ -4,10 +4,11 @@ import user from "@testing-library/user-event";
 import fs from "fs";
 import path from "path";
 
-import { createServer } from "./tests/msw/server";
-import { WEATHER } from "./tests/constants/constants";
 import { getCelsius } from "./helpers/getCelsius";
 import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
+
+import { createServer } from "./tests/msw/server";
+import { WEATHER } from "./tests/constants/constants";
 
 const INITIAL_HTML: string = fs.readFileSync(
   path.resolve(__dirname, "../index.html"),
@@ -41,9 +42,10 @@ jest.mock("./constants/config.ts", () => ({
 
 beforeEach(() => {
   jest.resetModules();
-  const body = INITIAL_HTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i)![1];
 
+  const body = INITIAL_HTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i)![1];
   document.body.innerHTML = body;
+
   require("./index.ts");
   document.dispatchEvent(new Event("DOMContentLoaded"));
 });

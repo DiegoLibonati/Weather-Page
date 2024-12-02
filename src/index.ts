@@ -1,18 +1,19 @@
 import { WeatherCountry } from "./entities/entities";
 
-import {
-  countryName,
-  searchButton,
-  searchInput,
-  temperature,
-  temperatureDescription,
-  weatherImg,
-} from "./constants/elements";
 import { getWeatherInformation } from "./services/get/getWeatherInformation/getWeatherInformation";
 import { getCelsius } from "./helpers/getCelsius";
 import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
+import { getElements } from "./helpers/getElements";
 
 const searchTemp = async (): Promise<void> => {
+  const {
+    searchInput,
+    weatherImg,
+    countryName,
+    temperature,
+    temperatureDescription,
+  } = getElements();
+
   const inputValue: string = searchInput.value;
 
   if (!inputValue.trim()) {
@@ -42,6 +43,7 @@ const searchTemp = async (): Promise<void> => {
 
 const onInit = () => {
   // console.log("YOUR CONFIG FILE: ", CONFIG);
+  const { searchButton } = getElements();
 
   searchButton.addEventListener("click", searchTemp);
 };
