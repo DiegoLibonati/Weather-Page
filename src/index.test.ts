@@ -1,19 +1,12 @@
 import { screen } from "@testing-library/dom";
 import user from "@testing-library/user-event";
 
-import fs from "fs";
-import path from "path";
-
 import { getCelsius } from "./helpers/getCelsius";
 import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
 
 import { createServer } from "./tests/msw/server";
 import { WEATHER } from "./tests/constants/constants";
-
-const INITIAL_HTML: string = fs.readFileSync(
-  path.resolve(__dirname, "../index.html"),
-  "utf8"
-);
+import { OFFICIAL_BODY } from "./tests/jest.setup";
 
 createServer([
   {
@@ -43,8 +36,7 @@ jest.mock("./constants/config.ts", () => ({
 beforeEach(() => {
   jest.resetModules();
 
-  const body = INITIAL_HTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i)![1];
-  document.body.innerHTML = body;
+  document.body.innerHTML = OFFICIAL_BODY;
 
   require("./index.ts");
   document.dispatchEvent(new Event("DOMContentLoaded"));
