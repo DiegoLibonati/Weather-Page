@@ -1,20 +1,20 @@
 export const getElements = () => ({
   searchButton: document.querySelector(
-    ".section_container_search button"
+    ".card__header button"
   ) as HTMLButtonElement,
   searchInput: document.querySelector(
-    ".section_container_search input"
+    ".card__header input"
   ) as HTMLInputElement,
   weatherImg: document.querySelector(
-    ".section_container img"
+    ".card img"
   ) as HTMLImageElement,
   countryName: document.querySelector(
-    ".section_container_search h2"
+    ".card__header h2"
   ) as HTMLHeadingElement,
   temperature: document.querySelector(
-    ".section_container_temp h1"
+    ".card__temp h1"
   ) as HTMLHeadingElement,
   temperatureDescription: document.querySelector(
-    ".section_container_temp h3"
+    ".card__temp h3"
   ) as HTMLHeadingElement,
 });
