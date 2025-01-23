@@ -23,22 +23,33 @@
     ></script>
   </head>
   <body>
-    <main class="main">
+    <main class="main-app">
       <section class="card">
         <div class="card__header">
-          <h2>Wheater APP</h2>
-          <input type="text" placeholder="Search country" />
-          <button type="button" aria-label="search">SEARCH</button>
+          <h2 class="card__header-title">Wheater APP</h2>
+          <input
+            type="text"
+            placeholder="Search country"
+            class="card__header-input"
+          />
+          <button
+            type="button"
+            aria-label="search"
+            class="card__header-btn-search"
+          >
+            SEARCH
+          </button>
         </div>
 
         <img
           src="https://openweathermap.org/img/wn/04n@2x.png"
           alt="default img weather"
+          class="card__img"
         />
 
-        <div class="card__temp">
-          <h1></h1>
-          <h3></h3>
+        <div class="card__stats">
+          <h1 class="card__stats-temperature"></h1>
+          <h3 class="card__stats-temperature-description"></h3>
         </div>
       </section>
     </main>
