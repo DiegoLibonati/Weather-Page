@@ -27,7 +27,7 @@
   height: 10rem;
 }
 
-.card__header-title {
+.card__title {
   font-size: 3rem;
   color: var(--primary-color);
   text-align: center;
@@ -39,7 +39,7 @@
   padding-right: 2rem;
 }
 
-.card__header-input {
+.card__input {
   height: 3rem;
   width: 60%;
   font-size: 1rem;
@@ -52,7 +52,7 @@
   padding-left: 1rem;
 }
 
-.card__header-btn-search {
+.card__btn-search {
   font-size: 1rem;
   width: 30%;
   height: 3rem;
@@ -78,12 +78,12 @@
   height: 15rem;
 }
 
-.card__stats-temperature {
+.card__temperature {
   font-size: 3rem;
   color: var(--primary-color);
 }
 
-.card__stats-temperature-description {
+.card__temperature-description {
   font-size: 1.5rem;
   color: var(--primary-color);
 }
@@ -100,25 +100,25 @@
     flex-flow: row wrap;
   }
 
-  .card__header-title {
+  .card__title {
     text-align: center;
     font-size: 5rem;
     width: 100%;
   }
 
-  .card__header-input {
+  .card__input {
     width: 40%;
   }
 
-  .card__header-btn-search {
+  .card__btn-search {
     width: 20%;
   }
 
-  .card__stats-temperature {
+  .card__temperature {
     font-size: 4rem;
   }
 
-  .card__stats-temperature-description {
+  .card__temperature-description {
     font-size: 2rem;
   }
 }
