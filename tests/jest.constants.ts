@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-import { WeatherCountry } from "../entities/entities";
+import { WeatherCountry } from "../src/entities/entities";
 
 const INITIAL_HTML: string = fs.readFileSync(
-  path.resolve(__dirname, "../../index.html"),
+  path.resolve(__dirname, "../index.html"),
   "utf8"
 );
 

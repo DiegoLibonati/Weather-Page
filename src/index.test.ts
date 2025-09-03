@@ -1,8 +1,8 @@
 import { screen } from "@testing-library/dom";
 import user from "@testing-library/user-event";
 
-import { createServer } from "./tests/msw/server";
-import { WEATHER, OFFICIAL_BODY } from "./tests/jest.constants";
+import { createServer } from "../tests/msw/server";
+import { WEATHER, OFFICIAL_BODY } from "../tests/jest.constants";
 
 import { getCelsius } from "./helpers/getCelsius";
 import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
