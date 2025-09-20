@@ -1,4 +1,4 @@
-import { getCelsius } from "./getCelsius";
+import { getCelsius } from "@src/helpers/getCelsius";
 
 describe("getCelsius.ts", () => {
   describe("General Tests.", () => {

@@ -1,9 +1,9 @@
-import { WeatherCountry } from "./entities/entities";
+import { WeatherCountry } from "@src/entities/entities";
 
-import { getWeatherInformation } from "./services/get/getWeatherInformation/getWeatherInformation";
-import { getCelsius } from "./helpers/getCelsius";
-import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
-import { getElements } from "./helpers/getElements";
+import { getWeatherInformation } from "@src/services/get/getWeatherInformation/getWeatherInformation";
+import { getCelsius } from "@src/helpers/getCelsius";
+import { getCapitalizeWord } from "@src/helpers/getCapitalizeWord";
+import { getElements } from "@src/helpers/getElements";
 
 const searchTemp = async (): Promise<void> => {
   const {

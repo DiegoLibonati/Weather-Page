@@ -1,4 +1,4 @@
-import { Config } from "../entities/entities";
+import { Config } from "@src/entities/entities";
 
 export const CONFIG: Config = {
   API_KEY: import.meta.env.VITE_API_KEY || "YOUR API KEY",

@@ -1,4 +1,4 @@
-import { getCapitalizeWord } from "./getCapitalizeWord";
+import { getCapitalizeWord } from "@src/helpers/getCapitalizeWord";
 
 describe("getCapitalizeWord.ts", () => {
   describe("General Tests.", () => {

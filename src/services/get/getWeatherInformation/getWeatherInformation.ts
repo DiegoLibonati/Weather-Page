@@ -1,6 +1,6 @@
-import { WeatherCountry } from "../../../entities/entities";
+import { WeatherCountry } from "@src/entities/entities";
 
-import { CONFIG } from "../../../constants/config";
+import { CONFIG } from "@src/constants/config";
 
 export const getWeatherInformation = async (
   country: string

@@ -1,13 +1,13 @@
 import { screen } from "@testing-library/dom";
 import user from "@testing-library/user-event";
 
-import { createServer } from "../tests/msw/server";
-import { WEATHER, OFFICIAL_BODY } from "../tests/jest.constants";
+import { createServer } from "@tests/msw/server";
+import { WEATHER, OFFICIAL_BODY } from "@tests/jest.constants";
 
-import { getCelsius } from "./helpers/getCelsius";
-import { getCapitalizeWord } from "./helpers/getCapitalizeWord";
+import { getCelsius } from "@src/helpers/getCelsius";
+import { getCapitalizeWord } from "@src/helpers/getCapitalizeWord";
 
-jest.mock("./constants/config.ts", () => ({
+jest.mock("@src/constants/config.ts", () => ({
   get CONFIG() {
     return {
       API_KEY: process.env.VITE_API_KEY,

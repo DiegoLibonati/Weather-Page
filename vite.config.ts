@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
@@ -11,6 +12,12 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: false,
         },
+      },
+    },
+    resolve: {
+      alias: {
+        "@src": path.resolve(__dirname, "./src"),
+        "@tests": path.resolve(__dirname, "./tests"),
       },
     },
   };
