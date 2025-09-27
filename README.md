@@ -22,6 +22,7 @@ I made a web page that we can search the current weather of cities and countries
 1. Typescript
 2. CSS3
 3. HTML5
+4. Vite
 
 ## Libraries used
 
