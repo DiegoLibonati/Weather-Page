@@ -32,7 +32,6 @@ export type WeatherCountry = {
     all: number;
   };
   dt: number;
-  sys: { country: string; sunrise: number; sunset: number };
   sys: {
     type: number;
     id: number;
@@ -44,9 +43,4 @@ export type WeatherCountry = {
   id: number;
   name: string;
   cod: number;
-};
-
-export type Config = {
-  API_KEY: string;
-  API_URL: string;
 };

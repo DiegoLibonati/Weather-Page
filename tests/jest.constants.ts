@@ -1,16 +1,4 @@
-import fs from "fs";
-import path from "path";
-
-import { WeatherCountry } from "@src/entities/entities";
-
-const INITIAL_HTML: string = fs.readFileSync(
-  path.resolve(__dirname, "../index.html"),
-  "utf8"
-);
-
-export const OFFICIAL_BODY = INITIAL_HTML.match(
-  /<body[^>]*>([\s\S]*?)<\/body>/i
-)![1];
+import { WeatherCountry } from "@src/entities/app";
 
 export const WEATHER: WeatherCountry = {
   coord: { lon: -64, lat: -34 },
@@ -30,7 +18,7 @@ export const WEATHER: WeatherCountry = {
   wind: { speed: 4.83, deg: 107, gust: 5.41 },
   clouds: { all: 6 },
   dt: 1731964134,
-  sys: { country: "AR", sunrise: 1731920531, sunset: 1731970840 },
+  sys: { country: "AR", sunrise: 1731920531, sunset: 1731970840, id: 23, type: 1 },
   timezone: -10800,
   id: 3865483,
   name: "Argentina",

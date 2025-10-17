@@ -1,6 +1,8 @@
-import { Config } from "@src/entities/entities";
+import { Envs } from "@src/entities/constants";
 
-export const CONFIG: Config = {
+const envs: Envs = {
   API_KEY: import.meta.env.VITE_API_KEY || "YOUR API KEY",
   API_URL: import.meta.env.VITE_API_URL || "YOUR API URL",
 };
+
+export default envs;
