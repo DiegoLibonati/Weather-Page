@@ -61,9 +61,13 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const img = document.querySelector(".card-stats__img");
-      const temperature = document.querySelector(".card-stats__temperature");
-      const description = document.querySelector(".card-stats__description");
+      const img = document.querySelector<HTMLImageElement>(".card-stats__img");
+      const temperature = document.querySelector<HTMLHeadingElement>(
+        ".card-stats__temperature"
+      );
+      const description = document.querySelector<HTMLHeadingElement>(
+        ".card-stats__description"
+      );
 
       expect(img).toBeInTheDocument();
       expect(temperature).toBeInTheDocument();
@@ -211,12 +215,12 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const temperature = document.querySelector(
+      const temperature = document.querySelector<HTMLHeadingElement>(
         ".card-stats__temperature"
-      ) as HTMLHeadingElement;
+      );
 
       expect(temperature).toBeInstanceOf(HTMLHeadingElement);
-      expect(temperature.tagName).toBe("H1");
+      expect(temperature!.tagName).toBe("H1");
     });
 
     test("It should render h3 for description", () => {
@@ -228,12 +232,12 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const description = document.querySelector(
+      const description = document.querySelector<HTMLHeadingElement>(
         ".card-stats__description"
-      ) as HTMLHeadingElement;
+      );
 
       expect(description).toBeInstanceOf(HTMLHeadingElement);
-      expect(description.tagName).toBe("H3");
+      expect(description!.tagName).toBe("H3");
     });
 
     test("It should render img element", () => {
@@ -245,12 +249,10 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const img = document.querySelector(
-        ".card-stats__img"
-      ) as HTMLImageElement;
+      const img = document.querySelector<HTMLImageElement>(".card-stats__img");
 
       expect(img).toBeInstanceOf(HTMLImageElement);
-      expect(img.tagName).toBe("IMG");
+      expect(img!.tagName).toBe("IMG");
     });
   });
 
@@ -264,12 +266,10 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const img = document.querySelector(
-        ".card-stats__img"
-      ) as HTMLImageElement;
+      const img = document.querySelector<HTMLImageElement>(".card-stats__img");
 
-      expect(img.src).toContain("https://openweathermap.org/img/wn/");
-      expect(img.src).toContain("@2x.png");
+      expect(img!.src).toContain("https://openweathermap.org/img/wn/");
+      expect(img!.src).toContain("@2x.png");
     });
 
     test("It should handle different icon codes", () => {
@@ -286,11 +286,10 @@ describe("CardStats.ts", () => {
 
         renderComponent(props);
 
-        const img = document.querySelector(
-          ".card-stats__img"
-        ) as HTMLImageElement;
+        const img =
+          document.querySelector<HTMLImageElement>(".card-stats__img");
 
-        expect(img.src).toBe(
+        expect(img!.src).toBe(
           `https://openweathermap.org/img/wn/${icon}@2x.png`
         );
       });
@@ -305,11 +304,9 @@ describe("CardStats.ts", () => {
 
       renderComponent(props);
 
-      const img = document.querySelector(
-        ".card-stats__img"
-      ) as HTMLImageElement;
+      const img = document.querySelector<HTMLImageElement>(".card-stats__img");
 
-      expect(img.src).toBe("https://openweathermap.org/img/wn/01n@2x.png");
+      expect(img!.src).toBe("https://openweathermap.org/img/wn/01n@2x.png");
     });
   });
 });

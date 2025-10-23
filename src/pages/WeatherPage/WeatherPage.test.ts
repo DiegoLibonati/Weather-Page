@@ -48,13 +48,13 @@ describe("WeatherPage.ts", () => {
 
       expect(container).toBeInstanceOf(HTMLElement);
       expect(container.className).toBe("weather-page");
-      expect(container.querySelector(".card")).toBeInTheDocument();
+      expect(container.querySelector<HTMLElement>(".card")).toBeInTheDocument();
     });
 
     test("It should render form with all elements", () => {
       renderComponent();
 
-      const form = document.querySelector(".card__form");
+      const form = document.querySelector<HTMLFormElement>(".card__form");
       const title = screen.getByText("Wheater APP");
       const input = screen.getByPlaceholderText("Search country");
       const button = screen.getByRole("button", { name: /search/i });
@@ -88,12 +88,10 @@ describe("WeatherPage.ts", () => {
     test("It should render h2 title", () => {
       renderComponent();
 
-      const title = document.querySelector(
-        ".card__title"
-      ) as HTMLHeadingElement;
+      const title = document.querySelector<HTMLHeadingElement>(".card__title");
 
       expect(title).toBeInstanceOf(HTMLHeadingElement);
-      expect(title.tagName).toBe("H2");
+      expect(title!.tagName).toBe("H2");
     });
   });
 
@@ -110,7 +108,7 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const cardStats = document.querySelector(".card-stats");
+        const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
         expect(cardStats).toBeInTheDocument();
       });
     });
@@ -122,7 +120,7 @@ describe("WeatherPage.ts", () => {
 
       await user.click(button);
 
-      const cardStats = document.querySelector(".card-stats");
+      const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
       expect(cardStats).not.toBeInTheDocument();
     });
 
@@ -137,7 +135,7 @@ describe("WeatherPage.ts", () => {
       await user.type(input, "   ");
       await user.click(button);
 
-      const cardStats = document.querySelector(".card-stats");
+      const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
       expect(cardStats).not.toBeInTheDocument();
     });
 
@@ -153,7 +151,7 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const cardStats = document.querySelector(".card-stats");
+        const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
         expect(cardStats).toBeInTheDocument();
       });
     });
@@ -192,7 +190,8 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const title = document.querySelector(".card__title");
+        const title =
+          document.querySelector<HTMLHeadingElement>(".card__title");
         expect(title?.textContent).toBe("ARGENTINA");
       });
     });
@@ -243,11 +242,10 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const img = document.querySelector(
-          ".card-stats__img"
-        ) as HTMLImageElement;
+        const img =
+          document.querySelector<HTMLImageElement>(".card-stats__img");
         expect(img).toBeInTheDocument();
-        expect(img.src).toContain(WEATHER.weather[0].icon);
+        expect(img!.src).toContain(WEATHER.weather[0].icon);
       });
     });
   });
@@ -265,7 +263,7 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const cardStats = document.querySelector(".card-stats");
+        const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
         expect(cardStats).toBeInTheDocument();
       });
     });
@@ -282,8 +280,8 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const card = document.querySelector(".card");
-        const cardStats = card?.querySelector(".card-stats");
+        const card = document.querySelector<HTMLElement>(".card");
+        const cardStats = card?.querySelector<HTMLDivElement>(".card-stats");
         expect(cardStats).toBeInTheDocument();
       });
     });
@@ -300,7 +298,7 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const cardStats = document.querySelector(".card-stats");
+        const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
         expect(cardStats).toBeInTheDocument();
       });
 
@@ -309,7 +307,8 @@ describe("WeatherPage.ts", () => {
       await user.click(button);
 
       await waitFor(() => {
-        const allCardStats = document.querySelectorAll(".card-stats");
+        const allCardStats =
+          document.querySelectorAll<HTMLDivElement>(".card-stats");
         expect(allCardStats.length).toBe(1);
       });
     });
@@ -347,7 +346,7 @@ describe("WeatherPage.ts", () => {
         "Search country"
       ) as HTMLInputElement;
       const button = screen.getByRole("button", { name: /search/i });
-      const title = document.querySelector(".card__title");
+      const title = document.querySelector<HTMLHeadingElement>(".card__title");
 
       await user.type(input, "Argentina");
       await user.click(button);
@@ -370,7 +369,9 @@ describe("WeatherPage.ts", () => {
     test("It should prevent default form submission", async () => {
       renderComponent();
 
-      const form = document.querySelector(".card__form") as HTMLFormElement;
+      const form = document.querySelector<HTMLFormElement>(
+        ".card__form"
+      ) as HTMLFormElement;
       const input = screen.getByPlaceholderText(
         "Search country"
       ) as HTMLInputElement;
@@ -389,7 +390,7 @@ describe("WeatherPage.ts", () => {
     test("It should have form element with correct class", () => {
       renderComponent();
 
-      const form = document.querySelector(".card__form");
+      const form = document.querySelector<HTMLFormElement>(".card__form");
 
       expect(form).toBeInstanceOf(HTMLFormElement);
       expect(form?.tagName).toBe("FORM");
