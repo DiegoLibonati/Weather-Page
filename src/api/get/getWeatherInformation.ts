@@ -1,10 +1,10 @@
-import { WeatherCountry } from "@src/entities/app";
+import { GetWeatherInformationResponse } from "@src/entities/responses";
 
 import envs from "@src/constants/envs";
 
 export const getWeatherInformation = async (
   country: string
-): Promise<WeatherCountry> => {
+): Promise<GetWeatherInformationResponse> => {
   try {
     const response = await fetch(
       `/weather?q=${country}&appid=${envs.API_KEY}`,
@@ -17,7 +17,9 @@ export const getWeatherInformation = async (
       throw new Error("Error fetching weather.");
     }
 
-    return response.json();
+    const data: GetWeatherInformationResponse = await response.json();
+
+    return data;
   } catch (e) {
     throw new Error(`Error fetching weather: ${e}.`);
   }
