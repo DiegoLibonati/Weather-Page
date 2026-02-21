@@ -14,12 +14,12 @@
 
 .card-stats__temperature {
   font-size: 3rem;
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 .card-stats__description {
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 @media only screen and (min-width: 1024px) {

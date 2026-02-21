@@ -1,12 +1,13 @@
-import { CardStatsProps } from "@src/entities/props";
+import type { CardStatsProps } from "@/types/props";
+import type { CardStatsComponent } from "@/types/components";
 
-import "@src/components/CardStats/CardStats.css";
+import "@/components/CardStats/CardStats.css";
 
 export const CardStats = ({
   temperature,
   description,
   icon,
-}: CardStatsProps) => {
+}: CardStatsProps): CardStatsComponent => {
   const divRoot = document.createElement("div");
   divRoot.className = "card-stats";
 
@@ -16,7 +17,7 @@ export const CardStats = ({
             alt="default img weather"
             class="card-stats__img"
         />
-        <h1 class="card-stats__temperature">${`${temperature}°`}</h1>
+        <h1 class="card-stats__temperature">${temperature}°</h1>
         <h3 class="card-stats__description">${description}</h3>
     `;
 

@@ -1,50 +1,22 @@
-import { CardStats } from "@src/components/CardStats/CardStats";
+import type { Page } from "@/types/pages";
 
-import { getWeatherInformation } from "@src/api/get/getWeatherInformation";
+import { CardStats } from "@/components/CardStats/CardStats";
 
-import { getCapitalizeWord } from "@src/helpers/getCapitalizeWord";
-import { getCelsius } from "@src/helpers/getCelsius";
+import { weatherService } from "@/services/weatherService";
 
-import "@src/pages/WeatherPage/WeatherPage.css";
+import { getCapitalizeWord } from "@/helpers/getCapitalizeWord";
+import { getCelsius } from "@/helpers/getCelsius";
 
-const onSubmitForm = async (e: SubmitEvent) => {
-  e.preventDefault();
+import "@/pages/WeatherPage/WeatherPage.css";
 
-  const input = document.querySelector<HTMLInputElement>(".card__input");
-
-  const value = input?.value.trim();
-
-  if (!value) return;
-
-  const weather = await getWeatherInformation(value);
-
-  const cardStats = document.querySelector<HTMLDivElement>(".card-stats");
-
-  if (cardStats) cardStats.remove();
-
-  const newCardStats = CardStats({
-    temperature: getCelsius(weather!.main.temp),
-    description: getCapitalizeWord(weather!.weather[0].description),
-    icon: weather!.weather[0].icon,
-  });
-
-  const card = document.querySelector<HTMLElement>(".card");
-
-  card?.append(newCardStats);
-
-  const title = document.querySelector<HTMLHeadingElement>(".card__title");
-
-  title!.textContent = weather.name.toUpperCase();
-};
-
-export const WeatherPage = (): HTMLElement => {
-  const main = document.createElement("main");
+export const WeatherPage = (): Page => {
+  const main = document.createElement("main") as Page;
   main.className = "weather-page";
 
   main.innerHTML = `
     <section class="card">
         <form class="card__form">
-            <h2 class="card__title">Wheater APP</h2>
+            <h2 class="card__title">Weather APP</h2>
             <input type="text" placeholder="Search country" class="card__input" />
             <button type="submit" aria-label="search" class="card__btn-search">
                 SEARCH
@@ -55,7 +27,46 @@ export const WeatherPage = (): HTMLElement => {
 
   const form = main.querySelector<HTMLFormElement>(".card__form");
 
-  form?.addEventListener("submit", (e) => onSubmitForm(e));
+  const onSubmitForm = async (e: SubmitEvent): Promise<void> => {
+    e.preventDefault();
+
+    const input = main.querySelector<HTMLInputElement>(".card__input");
+
+    const value = input?.value.trim();
+
+    if (!value) return;
+
+    const weather = await weatherService.getWeatherInformation(value);
+
+    const cardStats = main.querySelector<HTMLDivElement>(".card-stats");
+
+    if (cardStats) cardStats.remove();
+
+    const newCardStats = CardStats({
+      temperature: getCelsius(weather.main.temp),
+      description: getCapitalizeWord(weather.weather[0].description ?? ""),
+      icon: weather.weather[0].icon ?? "",
+    });
+
+    const card = main.querySelector<HTMLElement>(".card");
+    card?.append(newCardStats);
+
+    const title = main.querySelector<HTMLHeadingElement>(".card__title");
+
+    if (title) {
+      title.textContent = weather.name.toUpperCase();
+    }
+  };
+
+  const handleFormSubmit = (e: SubmitEvent): void => {
+    void onSubmitForm(e);
+  };
+
+  form?.addEventListener("submit", handleFormSubmit);
+
+  main.cleanup = (): void => {
+    form?.removeEventListener("submit", handleFormSubmit);
+  };
 
   return main;
 };

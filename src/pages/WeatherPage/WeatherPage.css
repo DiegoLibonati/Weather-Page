@@ -13,9 +13,9 @@
   flex-flow: column wrap;
   width: 80%;
   height: 80%;
-  border: 0.1rem solid var(--black-color);
-  background: var(--secondary-color);
-  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--black-color);
+  border: 0.1rem solid var(--color-black);
+  background: var(--color-secondary);
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--color-black);
 }
 
 .card__form {
@@ -29,7 +29,7 @@
 
 .card__title {
   font-size: 3rem;
-  color: var(--primary-color);
+  color: var(--color-primary);
   text-align: center;
   width: 100%;
   text-overflow: ellipsis;
@@ -45,8 +45,8 @@
   font-size: 1rem;
   border: none;
   outline: none;
-  background-color: var(--primary-color);
-  color: var(--white-color);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   padding-left: 1rem;
@@ -57,8 +57,8 @@
   width: 30%;
   height: 3rem;
   border: none;
-  background-color: var(--primary-color);
-  color: var(--white-color);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   cursor: pointer;
