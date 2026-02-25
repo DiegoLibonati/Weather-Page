@@ -31,7 +31,7 @@ I made a web page that we can search the current weather of cities and countries
 #### Dependencies
 
 ```
-There are no dependencies.
+No production dependencies - Pure Vanilla TypeScript
 ```
 
 #### devDependencies
