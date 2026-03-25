@@ -36,7 +36,7 @@ describe("CardStats Component", () => {
       "src",
       "https://openweathermap.org/img/wn/01d@2x.png"
     );
-    expect(img).toHaveAttribute("alt", "default img weather");
+    expect(img).toHaveAttribute("alt", "Clear sky weather icon");
   });
 
   it("should render temperature with degree symbol", () => {

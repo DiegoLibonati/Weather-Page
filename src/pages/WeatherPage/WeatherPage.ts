@@ -17,8 +17,8 @@ export const WeatherPage = (): Page => {
     <section class="card">
         <form class="card__form">
             <h2 class="card__title">Weather APP</h2>
-            <input type="text" placeholder="Search country" class="card__input" />
-            <button type="submit" aria-label="search" class="card__btn-search">
+            <input type="text" placeholder="Search country" aria-label="Country or city name" class="card__input" />
+            <button type="submit" aria-label="Search weather" class="card__btn-search">
                 SEARCH
             </button>
         </form>

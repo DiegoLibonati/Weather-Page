@@ -72,7 +72,7 @@ describe("WeatherPage", () => {
   it("should render search button", () => {
     renderPage();
 
-    const button = screen.getByRole("button", { name: "search" });
+    const button = screen.getByRole("button", { name: "Search weather" });
     expect(button).toBeInTheDocument();
     expect(button.textContent.trim()).toBe("SEARCH");
   });
