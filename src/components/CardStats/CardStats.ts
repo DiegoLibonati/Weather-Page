@@ -3,7 +3,7 @@ import type { CardStatsComponent } from "@/types/components";
 
 import "@/components/CardStats/CardStats.css";
 
-export const CardStats = ({
+const CardStats = ({
   temperature,
   description,
   icon,
@@ -23,3 +23,5 @@ export const CardStats = ({
 
   return divRoot;
 };
+
+export default CardStats;

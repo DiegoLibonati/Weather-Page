@@ -1,6 +1,6 @@
 import type { Page } from "@/types/pages";
 
-import { CardStats } from "@/components/CardStats/CardStats";
+import CardStats from "@/components/CardStats/CardStats";
 
 import { weatherService } from "@/services/weatherService";
 
@@ -9,7 +9,7 @@ import { getCelsius } from "@/helpers/getCelsius";
 
 import "@/pages/WeatherPage/WeatherPage.css";
 
-export const WeatherPage = (): Page => {
+const WeatherPage = (): Page => {
   const main = document.createElement("main") as Page;
   main.className = "weather-page";
 
@@ -70,3 +70,5 @@ export const WeatherPage = (): Page => {
 
   return main;
 };
+
+export default WeatherPage;

@@ -12,7 +12,7 @@ import userEvent from "@testing-library/user-event";
 
 import type { Page } from "@/types/pages";
 
-import { WeatherPage } from "@/pages/WeatherPage/WeatherPage";
+import WeatherPage from "@/pages/WeatherPage/WeatherPage";
 
 import { weatherService } from "@/services/weatherService";
 

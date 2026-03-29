@@ -1,7 +1,7 @@
 import type { CardStatsProps } from "@/types/props";
 import type { CardStatsComponent } from "@/types/components";
 
-import { CardStats } from "@/components/CardStats/CardStats";
+import CardStats from "@/components/CardStats/CardStats";
 
 const renderComponent = (props: CardStatsProps): CardStatsComponent => {
   const container = CardStats(props);
