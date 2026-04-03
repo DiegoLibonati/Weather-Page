@@ -1,3 +1,5 @@
 import "@testing-library/jest-dom";
 
-global.fetch = jest.fn();
+const mockFetch = jest.fn();
+
+global.fetch = mockFetch;
