@@ -22,11 +22,11 @@ import {
   mockWeather3,
 } from "@tests/__mocks__/weather.mock";
 
-jest.mock("@/services/weatherService");
-
 const mockedWeatherService = weatherService as jest.Mocked<
   typeof weatherService
 >;
+
+jest.mock("@/services/weatherService");
 
 const renderPage = (): Page => {
   const container = WeatherPage();
