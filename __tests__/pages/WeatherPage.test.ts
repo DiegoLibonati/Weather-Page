@@ -14,7 +14,7 @@ import type { Page } from "@/types/pages";
 
 import WeatherPage from "@/pages/WeatherPage/WeatherPage";
 
-import { weatherService } from "@/services/weatherService";
+import weatherService from "@/services/weatherService";
 
 import {
   mockWeather,

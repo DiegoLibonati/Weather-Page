@@ -2,7 +2,7 @@ import type { Page } from "@/types/pages";
 
 import CardStats from "@/components/CardStats/CardStats";
 
-import { weatherService } from "@/services/weatherService";
+import weatherService from "@/services/weatherService";
 
 import { getCapitalizeWord } from "@/helpers/getCapitalizeWord";
 import { getCelsius } from "@/helpers/getCelsius";

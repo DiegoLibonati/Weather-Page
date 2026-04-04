@@ -2,7 +2,7 @@ import type { WeatherCountry } from "@/types/app";
 
 import envs from "@/constants/envs";
 
-export const weatherService = {
+const weatherService = {
   getWeatherInformation: async (country: string): Promise<WeatherCountry> => {
     const response = await fetch(
       `/weather?q=${country}&appid=${envs.API_KEY}`,
@@ -19,3 +19,5 @@ export const weatherService = {
     return weatherInformation;
   },
 };
+
+export default weatherService;

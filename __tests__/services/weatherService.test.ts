@@ -7,7 +7,7 @@ jest.mock("@/constants/envs", () => {
   };
 });
 
-import { weatherService } from "@/services/weatherService";
+import weatherService from "@/services/weatherService";
 
 import { mockWeather } from "@tests/__mocks__/weather.mock";
 
