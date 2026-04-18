@@ -1,54 +1,83 @@
-import { mockEnvs } from "@tests/__mocks__/envs.mock";
-
-jest.mock("@/constants/envs", () => {
-  return {
-    __esModule: true,
-    default: mockEnvs,
-  };
-});
-
 import weatherService from "@/services/weatherService";
 
 import { mockWeather } from "@tests/__mocks__/weather.mock";
 
-const mockedFetch = global.fetch as jest.MockedFunction<typeof fetch>;
+const mockFetchSuccess = (data: unknown): void => {
+  (global.fetch as jest.Mock).mockResolvedValue({
+    ok: true,
+    json: () => data,
+  } as Response);
+};
+
+const mockFetchError = (status: number): void => {
+  (global.fetch as jest.Mock).mockResolvedValue({
+    ok: false,
+    status,
+  } as Response);
+};
+
+const mockFetchNetworkError = (message = "Network error"): void => {
+  (global.fetch as jest.Mock).mockRejectedValue(new Error(message));
+};
 
 describe("weatherService", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  describe("getWeatherInformation", () => {
+    describe("when the request succeeds", () => {
+      it("should return the parsed weather data", async () => {
+        mockFetchSuccess(mockWeather);
+        const result = await weatherService.getWeatherInformation("Argentina");
+        expect(result).toEqual(mockWeather);
+      });
 
-  it("should fetch weather information successfully", async () => {
-    mockedFetch.mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve(mockWeather),
-    } as Response);
+      it("should call fetch with the correct URL and method", async () => {
+        mockFetchSuccess(mockWeather);
+        await weatherService.getWeatherInformation("Argentina");
+        expect(global.fetch).toHaveBeenCalledWith(
+          "/weather?q=Argentina&appid=YOUR_API_KEY",
+          { method: "GET" }
+        );
+      });
 
-    const result = await weatherService.getWeatherInformation("Argentina");
+      it("should call fetch with the encoded country name", async () => {
+        mockFetchSuccess(mockWeather);
+        await weatherService.getWeatherInformation("New York");
+        expect(global.fetch).toHaveBeenCalledWith(
+          "/weather?q=New York&appid=YOUR_API_KEY",
+          { method: "GET" }
+        );
+      });
+    });
 
-    expect(result).toEqual(mockWeather);
-    expect(mockedFetch).toHaveBeenCalledWith(
-      expect.stringContaining("Argentina"),
-      expect.objectContaining({ method: "GET" })
-    );
-  });
+    describe("when the request fails with an HTTP error", () => {
+      it("should throw an error with the 404 status code", async () => {
+        mockFetchError(404);
+        await expect(
+          weatherService.getWeatherInformation("UnknownCity")
+        ).rejects.toThrow("HTTP error! status: 404");
+      });
 
-  it("should throw error when weather fetch fails", async () => {
-    mockedFetch.mockResolvedValue({
-      ok: false,
-      status: 404,
-    } as Response);
+      it("should throw an error with the 500 status code", async () => {
+        mockFetchError(500);
+        await expect(
+          weatherService.getWeatherInformation("SomeCity")
+        ).rejects.toThrow("HTTP error! status: 500");
+      });
 
-    await expect(
-      weatherService.getWeatherInformation("InvalidCity")
-    ).rejects.toThrow("HTTP error! status: 404");
-  });
+      it("should throw an error with the 401 status code", async () => {
+        mockFetchError(401);
+        await expect(
+          weatherService.getWeatherInformation("SomeCity")
+        ).rejects.toThrow("HTTP error! status: 401");
+      });
+    });
 
-  it("should throw error on network failure", async () => {
-    mockedFetch.mockRejectedValue(new Error("Network error"));
-
-    await expect(
-      weatherService.getWeatherInformation("Argentina")
-    ).rejects.toThrow("Network error");
+    describe("when the request fails with a network error", () => {
+      it("should throw the network error", async () => {
+        mockFetchNetworkError("Network error");
+        await expect(
+          weatherService.getWeatherInformation("SomeCity")
+        ).rejects.toThrow("Network error");
+      });
+    });
   });
 });

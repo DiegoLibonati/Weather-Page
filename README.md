@@ -1,4 +1,4 @@
-# Weather Page
+# Zephyr
 
 ## Educational Purpose
 
@@ -17,7 +17,13 @@ The application will open automatically at `http://localhost:3000`
 
 ## Description
 
-I made a web page that we can search the current weather of cities and countries, through a free internet API will show different information such as the city or country, a weather icon, the degrees and how is the weather.
+**Zephyr** is a lightweight, framework-free weather web application built with vanilla TypeScript and Vite. It allows users to look up real-time weather conditions for any city or country in the world by querying the OpenWeatherMap API.
+
+Once a search is submitted, the app displays the current temperature in Celsius, a visual weather icon representing the atmospheric conditions, and a short description of the weather (e.g. "Clear sky", "Heavy rain", "Scattered clouds"). The page title updates dynamically to reflect the searched location, giving the interface a clean and responsive feel without any page reloads.
+
+The application is built as a single-page app (SPA) with a clear separation of concerns: pages orchestrate the layout and user interactions, components handle reusable UI rendering, services encapsulate all API communication, and helpers provide pure utility functions for data transformation (Kelvin to Celsius conversion, string capitalization). All API requests are proxied through Vite's dev server to avoid CORS issues during development.
+
+The codebase follows strict TypeScript configuration with exact optional property types, no unused locals or parameters, and enforced code style via ESLint and Prettier with a Husky pre-commit hook. The project also includes a full test suite using Jest, ts-jest, and Testing Library, covering components, pages, services, and helpers with a minimum 70% coverage threshold.
 
 ## Technologies used
 
@@ -59,11 +65,7 @@ No production dependencies - Pure Vanilla TypeScript
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Weather-Page`](https://www.diegolibonati.com.ar/#/project/Weather-Page)
-
-## Video
-
-https://user-images.githubusercontent.com/99032604/199374571-9b1fa392-28e1-4dea-bdfe-64065644b203.mp4
+[`https://www.diegolibonati.com.ar/#/project/zephyr`](https://www.diegolibonati.com.ar/#/project/zephyr)
 
 ## Testing
 

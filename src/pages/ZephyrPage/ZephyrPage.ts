@@ -7,16 +7,16 @@ import weatherService from "@/services/weatherService";
 import { getCapitalizeWord } from "@/helpers/getCapitalizeWord";
 import { getCelsius } from "@/helpers/getCelsius";
 
-import "@/pages/WeatherPage/WeatherPage.css";
+import "@/pages/ZephyrPage/ZephyrPage.css";
 
-const WeatherPage = (): Page => {
+const ZephyrPage = (): Page => {
   const main = document.createElement("main") as Page;
-  main.className = "weather-page";
+  main.className = "zephyr-page";
 
   main.innerHTML = `
     <section class="card">
         <form class="card__form">
-            <h2 class="card__title">Weather APP</h2>
+            <h2 class="card__title">Zephyr</h2>
             <input type="text" placeholder="Search country" aria-label="Country or city name" class="card__input" />
             <button type="submit" aria-label="Search weather" class="card__btn-search">
                 SEARCH
@@ -71,4 +71,4 @@ const WeatherPage = (): Page => {
   return main;
 };
 
-export default WeatherPage;
+export default ZephyrPage;

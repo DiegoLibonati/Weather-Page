@@ -1,7 +1,7 @@
 {
-  "name": "Weather",
-  "short_name": "Weather",
-  "description": "I made a web page that we can search the current weather of cities and countries, through a free internet API will show different information such as the city or country, a weather icon, the degrees and how is the weather.",
+  "name": "Zephyr",
+  "short_name": "Zephyr",
+  "description": "Zephyr is a lightweight, framework-free weather web application built with vanilla TypeScript and Vite. It allows users to look up real-time weather conditions for any city or country in the world by querying the OpenWeatherMap API.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
