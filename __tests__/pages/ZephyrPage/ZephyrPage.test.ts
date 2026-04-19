@@ -7,8 +7,17 @@ import ZephyrPage from "@/pages/ZephyrPage/ZephyrPage";
 
 import { mockWeather, mockWeather2 } from "@tests/__mocks__/weather.mock";
 
+jest.mock("@/constants/envs", () => {
+  const mockData = jest.requireActual("@tests/__mocks__/envs.mock");
+  const { mockEnvs } = mockData;
+  return {
+    __esModule: true,
+    default: mockEnvs,
+  };
+});
+
 const mockFetchSuccess = (data: unknown): void => {
-  (global.fetch as jest.Mock).mockResolvedValue({
+  global.fetch = jest.fn().mockResolvedValue({
     ok: true,
     json: () => data,
   } as Response);
@@ -57,6 +66,7 @@ describe("ZephyrPage", () => {
   describe("behavior", () => {
     describe("when submitting with an empty input", () => {
       it("should not call fetch", async () => {
+        global.fetch = jest.fn();
         renderPage();
         const user = userEvent.setup();
         await user.click(
@@ -68,6 +78,7 @@ describe("ZephyrPage", () => {
 
     describe("when submitting with only whitespace", () => {
       it("should not call fetch", async () => {
+        global.fetch = jest.fn();
         renderPage();
         const user = userEvent.setup();
         await user.type(

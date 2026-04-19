@@ -2,22 +2,31 @@ import weatherService from "@/services/weatherService";
 
 import { mockWeather } from "@tests/__mocks__/weather.mock";
 
+jest.mock("@/constants/envs", () => {
+  const mockData = jest.requireActual("@tests/__mocks__/envs.mock");
+  const { mockEnvs } = mockData;
+  return {
+    __esModule: true,
+    default: mockEnvs,
+  };
+});
+
 const mockFetchSuccess = (data: unknown): void => {
-  (global.fetch as jest.Mock).mockResolvedValue({
+  global.fetch = jest.fn().mockResolvedValue({
     ok: true,
     json: () => data,
   } as Response);
 };
 
 const mockFetchError = (status: number): void => {
-  (global.fetch as jest.Mock).mockResolvedValue({
+  global.fetch = jest.fn().mockResolvedValue({
     ok: false,
     status,
   } as Response);
 };
 
 const mockFetchNetworkError = (message = "Network error"): void => {
-  (global.fetch as jest.Mock).mockRejectedValue(new Error(message));
+  global.fetch = jest.fn().mockRejectedValue(new Error(message));
 };
 
 describe("weatherService", () => {
