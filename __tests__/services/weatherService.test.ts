@@ -14,7 +14,7 @@ jest.mock("@/constants/envs", () => {
 const mockFetchSuccess = (data: unknown): void => {
   global.fetch = jest.fn().mockResolvedValue({
     ok: true,
-    json: () => data,
+    json: async () => await data,
   } as Response);
 };
 
@@ -30,6 +30,10 @@ const mockFetchNetworkError = (message = "Network error"): void => {
 };
 
 describe("weatherService", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   describe("getWeatherInformation", () => {
     describe("when the request succeeds", () => {
       it("should return the parsed weather data", async () => {

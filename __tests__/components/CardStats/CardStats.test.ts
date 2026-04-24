@@ -22,6 +22,7 @@ const renderComponent = (
 describe("CardStats", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
   describe("rendering", () => {
@@ -82,7 +83,7 @@ describe("CardStats", () => {
     });
   });
 
-  describe("with different props", () => {
+  describe("edge cases", () => {
     it("should render the correct temperature when given a different value", () => {
       renderComponent({ temperature: -10 });
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
