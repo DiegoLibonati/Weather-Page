@@ -59,7 +59,9 @@ describe("ZephyrPage", () => {
 
     it("should not render card stats on initial load", () => {
       renderPage();
-      expect(document.querySelector(".card-stats")).not.toBeInTheDocument();
+      expect(
+        document.querySelector<HTMLDivElement>(".card-stats")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -105,7 +107,9 @@ describe("ZephyrPage", () => {
           screen.getByRole("button", { name: "Search weather" })
         );
         await waitFor(() => {
-          expect(document.querySelector(".card-stats")).toBeInTheDocument();
+          expect(
+            document.querySelector<HTMLDivElement>(".card-stats")
+          ).toBeInTheDocument();
         });
       });
 
@@ -140,7 +144,9 @@ describe("ZephyrPage", () => {
           screen.getByRole("button", { name: "Search weather" })
         );
         await waitFor(() => {
-          expect(document.querySelector(".card-stats")).toBeInTheDocument();
+          expect(
+            document.querySelector<HTMLDivElement>(".card-stats")
+          ).toBeInTheDocument();
         });
 
         mockFetchSuccess(mockWeather2);
@@ -172,7 +178,9 @@ describe("ZephyrPage", () => {
         "Argentina"
       );
       await user.click(screen.getByRole("button", { name: "Search weather" }));
-      expect(document.querySelector(".card-stats")).not.toBeInTheDocument();
+      expect(
+        document.querySelector<HTMLDivElement>(".card-stats")
+      ).not.toBeInTheDocument();
     });
   });
 });
