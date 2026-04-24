@@ -1,7 +1,7 @@
 {
   "name": "Zephyr",
   "short_name": "Zephyr",
-  "description": "Zephyr is a lightweight, framework-free weather web application built with vanilla TypeScript and Vite. It allows users to look up real-time weather conditions for any city or country in the world by querying the OpenWeatherMap API.",
+  "description": "Zephyr is a lightweight, framework-free weather web application built with vanilla TypeScript and Vite.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
