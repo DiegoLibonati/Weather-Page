@@ -1,9 +1,12 @@
 import type { WeatherCountry } from "@/types/app";
+import type { ResponseDirect } from "@/types/responses";
 
 import envs from "@/constants/envs";
 
 const weatherService = {
-  getWeatherInformation: async (country: string): Promise<WeatherCountry> => {
+  getWeatherInformation: async (
+    country: string
+  ): Promise<ResponseDirect<WeatherCountry>> => {
     const response = await fetch(
       `/weather?q=${country}&appid=${envs.API_KEY}`,
       {
@@ -13,10 +16,7 @@ const weatherService = {
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-    const weatherInformation: WeatherCountry =
-      (await response.json()) as WeatherCountry;
-
-    return weatherInformation;
+    return (await response.json()) as ResponseDirect<WeatherCountry>;
   },
 };
 
