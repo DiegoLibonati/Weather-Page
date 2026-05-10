@@ -6,15 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
-
 ## Description
 
 **Zephyr** is a lightweight, framework-free weather web application built with vanilla TypeScript and Vite. It allows users to look up real-time weather conditions for any city or country in the world by querying the OpenWeatherMap API.
@@ -27,12 +18,16 @@ The codebase follows strict TypeScript configuration with exact optional propert
 
 ## Technologies used
 
+The project intentionally avoids frameworks and runtime dependencies, relying only on the language and tooling layer:
+
 1. Typescript
 2. CSS3
 3. HTML5
 4. Vite
 
 ## Libraries used
+
+On top of those technologies, the following packages are used exclusively at development time (testing, linting, formatting and the build pipeline):
 
 #### Dependencies
 
@@ -64,22 +59,40 @@ No production dependencies - Pure Vanilla TypeScript
 "vite": "^7.1.5"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/zephyr`](https://www.diegolibonati.com.ar/#/project/zephyr)
+With the stack in mind, here's how to run the app locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Copy the environment template and fill in your credentials:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env` and set:
+   - `VITE_API_KEY` — your OpenWeatherMap API key
+   - `VITE_API_URL` — base URL (e.g. `https://api.openweathermap.org/data/2.5`)
+4. Execute: `npm install`
+5. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`.
 
 ## Testing
+
+Once the app is wired up, you can run the test suite (Jest + ts-jest + Testing Library) covering components, pages, services and helpers:
 
 1. Navigate to the project folder
 2. Execute: `npm test`
 
-For coverage report:
+For coverage report (the project enforces a 70% threshold on branches, functions, lines and statements):
 
 ```bash
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond test coverage, it's also worth auditing the dependency tree for known vulnerabilities.
 
 ### npm audit
 
@@ -92,3 +105,7 @@ npm audit
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/zephyr`](https://www.diegolibonati.com.ar/#/project/zephyr)
