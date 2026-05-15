@@ -1,11 +1,13 @@
 import { screen, waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { http, HttpResponse } from "msw";
 
 import type { Page } from "@/types/pages";
 
 import ZephyrPage from "@/pages/ZephyrPage/ZephyrPage";
 
-import { mockWeather, mockWeather2 } from "@tests/__mocks__/weather.mock";
+import { mockMswServer } from "@tests/__mocks__/mswServer.mock";
+import { mockWeather2 } from "@tests/__mocks__/weather.mock";
 
 jest.mock("@/constants/envs", () => {
   const mockData = jest.requireActual("@tests/__mocks__/envs.mock");
@@ -16,13 +18,6 @@ jest.mock("@/constants/envs", () => {
   };
 });
 
-const mockFetchSuccess = (data: unknown): void => {
-  global.fetch = jest.fn().mockResolvedValue({
-    ok: true,
-    json: async () => await data,
-  } as Response);
-};
-
 const renderPage = (): Page => {
   const element = ZephyrPage();
   document.body.appendChild(element);
@@ -32,12 +27,12 @@ const renderPage = (): Page => {
 describe("ZephyrPage", () => {
   afterEach(() => {
     document.body.innerHTML = "";
-    jest.restoreAllMocks();
   });
 
   describe("rendering", () => {
     it("should render the Zephyr title", () => {
       renderPage();
+
       expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
         "Zephyr"
       );
@@ -45,6 +40,7 @@ describe("ZephyrPage", () => {
 
     it("should render the country search input", () => {
       renderPage();
+
       expect(
         screen.getByRole("textbox", { name: "Country or city name" })
       ).toBeInTheDocument();
@@ -52,6 +48,7 @@ describe("ZephyrPage", () => {
 
     it("should render the search button", () => {
       renderPage();
+
       expect(
         screen.getByRole("button", { name: "Search weather" })
       ).toBeInTheDocument();
@@ -59,6 +56,7 @@ describe("ZephyrPage", () => {
 
     it("should not render card stats on initial load", () => {
       renderPage();
+
       expect(
         document.querySelector<HTMLDivElement>(".card-stats")
       ).not.toBeInTheDocument();
@@ -67,22 +65,27 @@ describe("ZephyrPage", () => {
 
   describe("behavior", () => {
     describe("when submitting with an empty input", () => {
-      it("should not call fetch", async () => {
-        global.fetch = jest.fn();
+      it("should not render card stats", async () => {
         renderPage();
         const user = userEvent.setup();
+
         await user.click(
           screen.getByRole("button", { name: "Search weather" })
         );
-        expect(global.fetch).not.toHaveBeenCalled();
+
+        await waitFor(() => {
+          expect(
+            document.querySelector<HTMLDivElement>(".card-stats")
+          ).not.toBeInTheDocument();
+        });
       });
     });
 
     describe("when submitting with only whitespace", () => {
-      it("should not call fetch", async () => {
-        global.fetch = jest.fn();
+      it("should not render card stats", async () => {
         renderPage();
         const user = userEvent.setup();
+
         await user.type(
           screen.getByRole("textbox", { name: "Country or city name" }),
           "   "
@@ -90,15 +93,20 @@ describe("ZephyrPage", () => {
         await user.click(
           screen.getByRole("button", { name: "Search weather" })
         );
-        expect(global.fetch).not.toHaveBeenCalled();
+
+        await waitFor(() => {
+          expect(
+            document.querySelector<HTMLDivElement>(".card-stats")
+          ).not.toBeInTheDocument();
+        });
       });
     });
 
     describe("when submitting a valid city name", () => {
       it("should render card stats after a successful search", async () => {
-        mockFetchSuccess(mockWeather);
         renderPage();
         const user = userEvent.setup();
+
         await user.type(
           screen.getByRole("textbox", { name: "Country or city name" }),
           "Argentina"
@@ -106,6 +114,7 @@ describe("ZephyrPage", () => {
         await user.click(
           screen.getByRole("button", { name: "Search weather" })
         );
+
         await waitFor(() => {
           expect(
             document.querySelector<HTMLDivElement>(".card-stats")
@@ -114,9 +123,9 @@ describe("ZephyrPage", () => {
       });
 
       it("should update the title with the country name in uppercase", async () => {
-        mockFetchSuccess(mockWeather);
         renderPage();
         const user = userEvent.setup();
+
         await user.type(
           screen.getByRole("textbox", { name: "Country or city name" }),
           "Argentina"
@@ -124,6 +133,7 @@ describe("ZephyrPage", () => {
         await user.click(
           screen.getByRole("button", { name: "Search weather" })
         );
+
         await waitFor(() => {
           expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
             "ARGENTINA"
@@ -132,7 +142,6 @@ describe("ZephyrPage", () => {
       });
 
       it("should replace the previous card stats on a second search", async () => {
-        mockFetchSuccess(mockWeather);
         renderPage();
         const user = userEvent.setup();
         const input = screen.getByRole("textbox", {
@@ -149,12 +158,18 @@ describe("ZephyrPage", () => {
           ).toBeInTheDocument();
         });
 
-        mockFetchSuccess(mockWeather2);
+        mockMswServer.use(
+          http.get("/weather", () => {
+            return HttpResponse.json(mockWeather2);
+          })
+        );
+
         await user.clear(input);
         await user.type(input, "Paris");
         await user.click(
           screen.getByRole("button", { name: "Search weather" })
         );
+
         await waitFor(() => {
           expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
             "PARIS"
@@ -169,15 +184,16 @@ describe("ZephyrPage", () => {
 
   describe("cleanup", () => {
     it("should remove the submit event listener when cleanup is called", async () => {
-      mockFetchSuccess(mockWeather);
       const page = renderPage();
       page.cleanup?.();
       const user = userEvent.setup();
+
       await user.type(
         screen.getByRole("textbox", { name: "Country or city name" }),
         "Argentina"
       );
       await user.click(screen.getByRole("button", { name: "Search weather" }));
+
       expect(
         document.querySelector<HTMLDivElement>(".card-stats")
       ).not.toBeInTheDocument();
