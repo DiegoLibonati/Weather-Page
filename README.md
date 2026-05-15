@@ -1,7 +1,5 @@
 # Zephyr
 
-[![CI](https://github.com/DiegoLibonati/Weather-Page/actions/workflows/ci.yml/badge.svg)](https://github.com/DiegoLibonati/Weather-Page/actions/workflows/ci.yml)
-
 ## Educational Purpose
 
 This project was created primarily for **educational and learning purposes**.  
@@ -105,6 +103,8 @@ Check for vulnerabilities in dependencies:
 ```bash
 npm audit
 ```
+
+[![CI](https://github.com/DiegoLibonati/Weather-Page/actions/workflows/ci.yml/badge.svg)](https://github.com/DiegoLibonati/Weather-Page/actions/workflows/ci.yml)
 
 ## Known Issues
 
